@@ -1,0 +1,33 @@
+<p>product-list works!</p>
+
+<div class="container card">
+  <app-filter-product (onGetValue)="getValue($event)"></app-filter-product>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Code</th>
+        <th scope="col">Description</th>
+        <th scope="col">ProductCode</th>
+        <th scope="col">Price</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Star Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of list; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td><img class="imageProduct" src="{{ item.imageUrl }}" alt="" /></td>
+        <td>{{ item.productName }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.productCode }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.releaseDate }}</td>
+        <td><app-star  (onClickStar)="getStar($event)" [star]="item.starRating"></app-star></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
