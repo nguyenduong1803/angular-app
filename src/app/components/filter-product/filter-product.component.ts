@@ -6,13 +6,14 @@ import { Component, Output, SimpleChanges, EventEmitter } from '@angular/core';
 })
 export class FilterProductComponent {
   _searchText: string = '';
-  set searchText(value: string) {
-    this.onGetValue.emit(value);
-    this._searchText = value;
-  }
-  get searchText(): string {
-    return this._searchText;
-  }
+  searchText: string = '';
+  // set searchText(value: string) {
+  //   this.onGetValue.emit(value);
+  //   this._searchText = value;
+  // }
+  // get searchText(): string {
+  //   return this._searchText;
+  // }
 
   @Output() onGetValue: EventEmitter<any> = new EventEmitter();
   constructor() {}

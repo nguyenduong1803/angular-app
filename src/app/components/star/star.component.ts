@@ -6,7 +6,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
   selector: 'app-star',
   templateUrl: './star.component.html',

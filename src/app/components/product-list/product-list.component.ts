@@ -1,5 +1,7 @@
-import { Component, ViewChild, Directive } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import IProduct from 'src/app/types/product';
+import { FilterProductComponent } from '../filter-product/filter-product.component';
+import { StarComponent } from '../star/star.component';
 const listProduct: IProduct[] = [
   {
     productId: 1,
@@ -50,15 +52,17 @@ const listProduct: IProduct[] = [
       'http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png',
   },
 ];
-@Directive({ selector: 'app-star' })
-class StarComponent {}
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
-  @ViewChild(StarComponent)
+export class ProductListComponent implements AfterViewInit {
+  @ViewChild(StarComponent) child: StarComponent | undefined;
+  @ViewChild(FilterProductComponent) filter: FilterProductComponent | undefined;
+  ngAfterViewInit() {
+    console.log(this.child?.star);
+  }
   list: IProduct[] = listProduct;
   getValue(key: string) {
     this.list = listProduct.filter(
@@ -69,8 +73,17 @@ export class ProductListComponent {
           .indexOf(key.toString().toLowerCase()) !== -1
     );
   }
+  ngDoCheck() {
+    this.list = listProduct.filter(
+      (item) =>
+        item.productName
+          .toString()
+          .toLowerCase()
+          .indexOf(this.filter?.searchText?.toString().toLowerCase() || '') !==
+        -1
+    );
+  }
   getStar(star: number) {
-    
     alert(`Đánh giá của sản phẩm là ${star} sao`);
   }
 }

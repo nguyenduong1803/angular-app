@@ -26,7 +26,13 @@
         <td>{{ item.productCode }}</td>
         <td>{{ item.price }}</td>
         <td>{{ item.releaseDate }}</td>
-        <td><app-star  (onClickStar)="getStar($event)" [star]="item.starRating"></app-star></td>
+        <td>
+          <app-star
+            #star
+            (onClickStar)="getStar($event)"
+            [star]="item.starRating"
+          ></app-star>
+        </td>
       </tr>
     </tbody>
   </table>
